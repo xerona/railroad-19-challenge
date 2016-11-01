@@ -1,0 +1,93 @@
+<div class="row">
+  <div *ngIf="!filtersShown">
+    <button class="btn btn-default" (click)=toggleFilters()>{{toggleText}}</button>
+  </div>
+  <div *ngIf="filtersShown" class="well">
+    <div class="row">
+      <form>
+        <div class="form-group col-sm-4">
+          <label for="titleFilter">Title</label>
+          <input [(ngModel)]="textFilter.title" (keyup)="filterChange.emit(textFilter)" class="form-control" name="titleFilter" placeholder="Title">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="divisionFilter">Division</label>
+          <input [(ngModel)]="textFilter.division" (keyup)="filterChange.emit(textFilter)" class="form-control" name="divisionFilter" placeholder="Division">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="ownerFilter">Owner</label>
+          <input [(ngModel)]="textFilter.projectOwner" (keyup)="filterChange.emit(textFilter)" class="form-control" name="ownerFilter" placeholder="Owner">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="budgetFilter">Budget</label>
+          <input [(ngModel)]="textFilter.budget" (keyup)="filterChange.emit(textFilter)" class="form-control" name="budgetFilter" placeholder="Budget">
+        </div>
+        <div class="form-group col-sm-4">
+          <label for="statusFilter">Status</label>
+          <input [(ngModel)]="textFilter.status" (keyup)="filterChange.emit(textFilter)" class="form-control" name="statusFilter" placeholder="Status">
+        </div>
+        <div class="form-group col-sm-12">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="createdStartDate">Created: Start Date</label>
+              <input
+                #createdStartDateRef="ngModel"
+                [(ngModel)]="dateFilter.created.startDate"
+                (keyup)="createdStartDateRef.valid && createdEndDateRef.valid && dateFilterChange.emit({created: dateFilter.created})"
+                class="form-control"
+                name="createdStartDate"
+                placeholder="MM/DD/YYYY"
+                pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
+              >
+            </div>
+            <div class="col-sm-6">
+              <label for="createdEndDate">Created: End Date</label>
+              <input
+                #createdEndDateRef="ngModel"
+                [(ngModel)]="dateFilter.created.endDate"
+                (keyup)="createdStartDateRef.valid && createdEndDateRef.valid && dateFilterChange.emit({modified: dateFilter.modified})"
+                class="form-control"
+                name="createdEndDate"
+                placeholder="MM/DD/YYYY"
+                pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
+              >
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-sm-12">
+          <div class="row">
+            <div class="col-sm-6">
+              <label for="modifiedStartDate">Modified: Start Date</label>
+              <input
+                #modifiedStartDateRef="ngModel"
+                [(ngModel)]="dateFilter.modified.startDate"
+                (keyup)="modifiedStartDateRef.valid && modifiedEndDateRef.valid && dateFilterChange.emit(dateFilter)"
+                class="form-control"
+                name="modifiedStartDate"
+                placeholder="MM/DD/YYYY"
+                pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
+              >
+            </div>
+            <div class="col-sm-6">
+              <label for="modifiedEndDate">Modified: End Date</label>
+              <input
+                #modifiedEndDateRef="ngModel"
+                [(ngModel)]="dateFilter.modified.endDate"
+                (keyup)="modifiedStartDateRef.valid && modifiedEndDateRef.valid && dateFilterChange.emit(dateFilter)"
+                class="form-control"
+                name="modifiedEndDate"
+                placeholder="MM/DD/YYYY"
+                pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row">
+      <div class="col-sm-12 text-right">
+        <button class="btn btn-default" (click)=toggleFilters()>{{toggleText}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row table"></div>

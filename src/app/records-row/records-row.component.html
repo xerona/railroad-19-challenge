@@ -1,0 +1,56 @@
+<form>
+  <div class="col-sm-1 table-data">{{record.title}}</div>
+  <div class="col-sm-1 table-data">{{record.division}}</div>
+  <div *ngIf="edit" class="col-sm-2">
+    <input
+      class="form-control text-center"
+      name="recordProjectOwner"
+      #recordProjectOwnerRef="ngModel"
+      [(ngModel)]="record.projectOwner"
+      placeholder="Project Owner"
+    >
+  </div>
+  <div *ngIf="!edit" class="col-sm-2 table-data">{{record.projectOwner}}</div>
+  <div *ngIf="edit" class="col-sm-2">
+    <input
+      class="form-control text-center"
+      name="recordBudget"
+      #recordBudgetRef="ngModel"
+      [(ngModel)]="record.budget"
+      placeholder="Budget"
+    >
+  </div>
+  <div *ngIf="!edit" class="col-sm-2 table-data">{{record.budget | currency: 'USD': true}}</div>
+  <div *ngIf="edit" class="col-sm-2">
+    <input
+      class="form-control text-center"
+      name="record.status"
+      #recordStatusRef="ngModel"
+      [(ngModel)]="record.status"
+      placeholder="Status"
+    >
+  </div>
+  <div *ngIf="!edit" class="col-sm-2 table-data">{{record.status}}</div>
+  <div class="col-sm-1 table-data">{{record.created}}</div>
+  <div class="col-sm-1 table-data">{{record.modified}}</div>
+  <div
+    class="col-sm-2 text-right"
+    *ngIf="edit"
+  >
+    <button class="btn btn-primary" (click)="saveChanges()">Save</button>
+    <button class="btn btn-link" (click)="cancelEdit()">Cancel</button>
+  </div>
+  <div
+    class="col-sm-2 text-right"
+    *ngIf="!edit"
+  >
+    <button
+      class="btn btn-default"
+      (click)="enableEdit()"
+    >Edit</button>
+    <button
+      class="btn btn-link"
+      [routerLink]="'record/'+record.title"
+    >Details</button>
+  </div>
+</form>

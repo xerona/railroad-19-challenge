@@ -1,0 +1,27 @@
+.table-row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: $table-border-color;
+  border-right-style: solid;
+  border-right-width: 1px;
+  border-right-color: $table-border-color;
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: $table-border-color;
+}
+.table-data {
+  padding: 8px;
+  text-align: center;
+}
+.table-header-row {
+  @extend .table-row;
+  border-bottom-width: 2px;
+  border-left-width: 0;
+  border-right-width: 0;
+}
+.table-header {
+  @extend .table-data;
+  font-weight: bold;
+}
