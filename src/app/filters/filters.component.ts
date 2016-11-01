@@ -1,7 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { RecordDateFilter } from '../shared/record-date-filter';
-import { RecordTextFilter } from '../shared/record-text-filter';
 
 @Component({
   selector: 'app-filters',

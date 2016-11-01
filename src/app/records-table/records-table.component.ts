@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { RecordsService } from '../shared/records.service';
-import { RecordDateFilter } from '../shared/record-date-filter';
-import { RecordTextFilter } from '../shared/record-text-filter';
 
 
 @Component({
