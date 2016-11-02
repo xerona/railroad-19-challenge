@@ -4,50 +4,57 @@
 <app-summary
   [records]="records$ | async"
 ></app-summary>
-<app-filters
-  (filterChange)="filterList($event)"
-  (dateFilterChange)="filterListByDate($event)"
-></app-filters>
+<div class="col-sm-12">
+  <app-filters
+    (filterChange)="filterList($event)"
+    (dateFilterChange)="filterListByDate($event)"
+  ></app-filters>
+</div>
 <div class="row">
   <alert *ngFor="let alert of alerts" type="success"  dismissOnTimeout="3000">
     {{alert?.msg}}
   </alert>
 </div>
-<div class="row table-header-row">
-  <div class="col-sm-1 table-header">Title</div>
-  <div class="col-sm-1 table-header">Division</div>
-  <div class="col-sm-2 table-header">Project Owner</div>
-  <div class="col-sm-2 table-header">Budget</div>
-  <div class="col-sm-2 table-header">Status</div>
-  <div class="col-sm-1 table-header">Created</div>
-  <div class="col-sm-1 table-header">Modified</div>
-  <div class="col-sm-2 text-right">
-    <button class="btn btn-primary">
-      <i class="fa fa-plus" aria-hidden="true"></i>
-      New
-    </button>
+<div class="col-sm-12">
+  <div class="row table-header-row">
+    <div class="col-sm-1 table-header">Title</div>
+    <div class="col-sm-1 table-header">Division</div>
+    <div class="col-sm-2 table-header">Project Owner</div>
+    <div class="col-sm-2 table-header">Budget</div>
+    <div class="col-sm-2 table-header">Status</div>
+    <div class="col-sm-1 table-header">Created</div>
+    <div class="col-sm-1 table-header">Modified</div>
+    <div class="col-sm-2 text-right">
+      <button class="btn btn-primary">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        New
+      </button>
+    </div>
   </div>
 </div>
-
-<div
-  class="row table-row"
-  *ngFor="let record of records$ | async"
->
-  <app-records-row
-    [record]="record"
-    (recordChange)="showAlert($event)"
-  ></app-records-row>
+<div class="col-sm-12">
+  <div
+    class="row table-row"
+    *ngFor="let record of records$ | async"
+  >
+    <app-records-row
+      [record]="record"
+      (recordChange)="showAlert($event)"
+    ></app-records-row>
+  </div>
 </div>
 <div class="row table"></div>
-<div class="row text-right">
-  <button class="btn btn-default">
-    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-    Export Data to PDF
-  </button>
-  <button class="btn btn-default">
-    <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-    Export Data to Excel Spreadsheet
-  </button>
+<div class="col-sm-12">
+  <div class="row text-right">
+    <button class="btn btn-default">
+      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+      Export Data to PDF
+    </button>
+    <button class="btn btn-default">
+      <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+      Export Data to Excel Spreadsheet
+    </button>
+  </div>
 </div>
 <div class="row table"></div>
 <div class="row table"></div>
