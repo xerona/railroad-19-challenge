@@ -15,7 +15,16 @@ export class SummaryComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.getTemplateData();
+  }
+
+  ngOnChanges() {
+    this.getTemplateData();
+  }
+
+  getTemplateData() {
     let data = {};
+    this.statuses = [];
     for (let record of this.records) {
       data[record.status] = data[record.status] || {};
       data[record.status]['budget'] = data[record.status]['budget'] || 0;
@@ -48,7 +57,6 @@ export class SummaryComponent implements OnInit {
         divisions: divisions
       });
     }
-    console.log(this.statuses);
   }
 
 }

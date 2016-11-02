@@ -11,7 +11,6 @@ export class RecordsService {
   constructor() { }
 
   data(textFilter = {}, dateFilter = {created: {startDate: '', endDate: ''}, modified: {startDate: '', endDate: ''}}) {
-    console.log(textFilter);
     return Observable.from([data])
     .map((values) => {
       let filteredArray = [];
