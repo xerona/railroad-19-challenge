@@ -28,6 +28,7 @@ export class RecordsTableComponent implements OnInit {
   showAlert(alertData) {
     this.alerts = [];
     this.alerts.push(alertData);
+    this.fetchRecords();
   }
 
   filterList(textFilter) {
@@ -41,6 +42,7 @@ export class RecordsTableComponent implements OnInit {
   }
 
   fetchRecords() {
+    // I suspect I'm doing this wrongly. New data should be pushed.
     this.records$ = this.recordsService.data(this.textFilter, this.dateFilter);
   }
 

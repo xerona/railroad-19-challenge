@@ -8,10 +8,13 @@ import { data } from './mock-data';
 @Injectable()
 export class RecordsService {
 
-  constructor() { }
+  localData = data;
+
+  constructor() {
+  }
 
   data(textFilter = {}, dateFilter = {created: {startDate: '', endDate: ''}, modified: {startDate: '', endDate: ''}}) {
-    return Observable.from([data])
+    return Observable.from([this.localData])
     .map((values) => {
       let filteredArray = [];
       for (let value of values) {
@@ -58,6 +61,15 @@ export class RecordsService {
       }
       return values;
     });
+  }
+
+  save(dataSet) {
+    for (let value of this.localData) {
+      if (value.title === dataSet.title) {
+        value = dataSet;
+        return;
+      }
+    }
   }
 
 }
