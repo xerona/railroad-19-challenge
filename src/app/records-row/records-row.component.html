@@ -47,7 +47,10 @@
     <button
       class="btn btn-default"
       (click)="enableEdit()"
-    >Edit</button>
+    >
+      <i class="fa fa-pencil" aria-hidden="true"></i>
+      Edit
+    </button>
     <button
       class="btn btn-link"
       [routerLink]="'record/'+record.title"

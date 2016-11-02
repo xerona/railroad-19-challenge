@@ -1,6 +1,9 @@
 <div class="row">
   <div *ngIf="!filtersShown">
-    <button class="btn btn-default" (click)=toggleFilters()>{{toggleText}}</button>
+    <button class="btn btn-default" (click)=toggleFilters()>
+      <i class="fa fa-filter" aria-hidden="true"></i>
+      {{toggleText}}
+    </button>
   </div>
   <div *ngIf="filtersShown" class="well">
     <div class="row">
