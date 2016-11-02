@@ -6,11 +6,11 @@
     >
       <div class="panel panel-primary">
         <div class="panel-heading">
-          {{status.budget |  currency: 'USD': true}} - {{status.total}} {{status.name}} projects
+          {{status.budget |  currency: 'USD': true}} - {{status.total}} {{status.name | capitalize}} projects
         </div>
         <div class="panel-body">
           <p *ngFor="let division of status.divisions">
-            {{division.budget |  currency: 'USD': true}} - {{division.total}} {{division.name}} projects
+            {{division.budget |  currency: 'USD': true}} - {{division.total}} {{division.name | capitalize}} projects
           </p>
         </div>
       </div>

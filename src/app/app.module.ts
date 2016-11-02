@@ -12,6 +12,7 @@ import { RecordsService } from './shared/records.service';
 import { FiltersComponent } from './filters/filters.component';
 import { DetailedRecordComponent } from './detailed-record/detailed-record.component';
 import { SummaryComponent } from './summary/summary.component';
+import { CapitalizePipe } from './shared/capitalize.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SummaryComponent } from './summary/summary.component';
     RecordsRowComponent,
     FiltersComponent,
     DetailedRecordComponent,
-    SummaryComponent
+    SummaryComponent,
+    CapitalizePipe
   ],
   imports: [
     BrowserModule,
