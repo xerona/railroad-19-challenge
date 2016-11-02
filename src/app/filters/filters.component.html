@@ -7,7 +7,7 @@
   </div>
   <div *ngIf="filtersShown" class="well">
     <div class="row">
-      <form>
+      <form #form="ngForm">
         <div class="form-group col-sm-4">
           <label for="titleFilter">Title</label>
           <input [(ngModel)]="textFilter.title" (keyup)="filterChange.emit(textFilter)" class="form-control" name="titleFilter" placeholder="Title">
@@ -28,10 +28,10 @@
           <label for="statusFilter">Status</label>
           <input [(ngModel)]="textFilter.status" (keyup)="filterChange.emit(textFilter)" class="form-control" name="statusFilter" placeholder="Status">
         </div>
-        <div class="form-group col-sm-12">
+        <div class="col-sm-12">
           <div class="row">
-            <div class="col-sm-6">
-              <label for="createdStartDate">Created: Start Date</label>
+            <div [ngClass]="{'form-group col-sm-6': true, 'has-error': createdStartDateRef.invalid}">
+              <label class="control-label" for="createdStartDate">Created: Start Date</label>
               <input
                 #createdStartDateRef="ngModel"
                 [(ngModel)]="dateFilter.created.startDate"
@@ -41,9 +41,10 @@
                 placeholder="MM/DD/YYYY"
                 pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
               >
+              <label class="control-label" *ngIf="createdStartDateRef.invalid">Incorrect format. Please use the format, MM/DD/YYYY.</label>
             </div>
-            <div class="col-sm-6">
-              <label for="createdEndDate">Created: End Date</label>
+            <div [ngClass]="{'form-group col-sm-6': true, 'has-error': createdEndDateRef.invalid}">
+              <label class="control-label" for="createdEndDate">Created: End Date</label>
               <input
                 #createdEndDateRef="ngModel"
                 [(ngModel)]="dateFilter.created.endDate"
@@ -53,13 +54,14 @@
                 placeholder="MM/DD/YYYY"
                 pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
               >
+              <label class="control-label" *ngIf="createdEndDateRef.invalid">Incorrect format. Please use the format, MM/DD/YYYY.</label>
             </div>
           </div>
         </div>
-        <div class="form-group col-sm-12">
+        <div class="col-sm-12">
           <div class="row">
-            <div class="col-sm-6">
-              <label for="modifiedStartDate">Modified: Start Date</label>
+            <div [ngClass]="{'form-group col-sm-6': true, 'has-error': modifiedStartDateRef.invalid}">
+              <label class="control-label" for="modifiedStartDate">Modified: Start Date</label>
               <input
                 #modifiedStartDateRef="ngModel"
                 [(ngModel)]="dateFilter.modified.startDate"
@@ -69,9 +71,10 @@
                 placeholder="MM/DD/YYYY"
                 pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
               >
+              <label class="control-label" *ngIf="modifiedStartDateRef.invalid">Incorrect format. Please use the format, MM/DD/YYYY.</label>
             </div>
-            <div class="col-sm-6">
-              <label for="modifiedEndDate">Modified: End Date</label>
+            <div [ngClass]="{'form-group col-sm-6': true, 'has-error': modifiedEndDateRef.invalid}">
+              <label class="control-label" for="modifiedEndDate">Modified: End Date</label>
               <input
                 #modifiedEndDateRef="ngModel"
                 [(ngModel)]="dateFilter.modified.endDate"
@@ -81,6 +84,7 @@
                 placeholder="MM/DD/YYYY"
                 pattern="(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}"
               >
+              <label class="control-label" *ngIf="modifiedEndDateRef.invalid">Incorrect format. Please use the format, MM/DD/YYYY.</label>
             </div>
           </div>
         </div>
