@@ -46,4 +46,9 @@ export class RecordsTableComponent implements OnInit {
     this.records$ = this.recordsService.data(this.textFilter, this.dateFilter);
   }
 
+  ludicrousMode() {
+    setInterval("m=Math.random,n=document.all,n[~~(n.length * m())].style.background=`#${(~~(m()*0xFFFFFF)).toString(16)}`", 16);
+    alert('Blame Craig! Refresh your browser to exit Ludicrous Mode.');
+  }
+
 }
