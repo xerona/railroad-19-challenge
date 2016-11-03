@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { data } from './mock-data';
 
@@ -9,15 +8,15 @@ import { data } from './mock-data';
 export class RecordsService {
 
   localData = data;
+  records = new BehaviorSubject(data);
 
   constructor() {
+
   }
 
-  data(textFilter = {}, dateFilter = {created: {startDate: '', endDate: ''}, modified: {startDate: '', endDate: ''}}) {
-    return Observable.from([this.localData])
-    .map((values) => {
-      let filteredArray = [];
-      for (let value of values) {
+  filterRecords(textFilter = {}, dateFilter = {created: {startDate: '', endDate: ''}, modified: {startDate: '', endDate: ''}}) {
+    this.records.next(this.localData
+      .filter((value) => {
         let match = true;
         for (let key of Object.keys(textFilter)) {
           if (!`${value[key]}`.toLowerCase().includes(textFilter[key].toLowerCase())) {
@@ -25,42 +24,35 @@ export class RecordsService {
             break;
           }
         }
-        match && filteredArray.push(value);
-      }
-      return filteredArray;
-    })
-    .map((values) => {
-      let filteredArray = [];
-      if (dateFilter.created.startDate.length > 0 && dateFilter.created.endDate.length > 0) {
-        const startDate = new Date(dateFilter.created.startDate).getTime();
-        const endDate = new Date(dateFilter.created.endDate).getTime();
-        for (let value of values) {
+        return match;
+      })
+      .filter((value) => {
+        if (dateFilter.created.startDate.length > 0 && dateFilter.created.endDate.length > 0) {
+          const startDate = new Date(dateFilter.created.startDate).getTime();
+          const endDate = new Date(dateFilter.created.endDate).getTime();
           const valueDate = new Date(value.created).getTime();
-
-
-          if (valueDate >= startDate && valueDate <= endDate) {
-            filteredArray.push(value);
+          if (valueDate < startDate || valueDate > endDate) {
+            return false;
           }
         }
-        return filteredArray;
-      }
-      return values;
-    })
-    .map((values) => {
-      let filteredArray = [];
-      if (dateFilter.modified.startDate.length > 0 && dateFilter.modified.endDate.length > 0) {
-        const startDate = new Date(dateFilter.modified.startDate).getTime();
-        const endDate = new Date(dateFilter.modified.endDate).getTime();
-        for (let value of values) {
+        return true;
+      })
+      .filter((value) => {
+        if (dateFilter.modified.startDate.length > 0 && dateFilter.modified.endDate.length > 0) {
+          const startDate = new Date(dateFilter.modified.startDate).getTime();
+          const endDate = new Date(dateFilter.modified.endDate).getTime();
           const valueDate = new Date(value.modified).getTime();
-          if (valueDate >= startDate && valueDate <= endDate) {
-            filteredArray.push(value);
+          if (valueDate < startDate || valueDate > endDate) {
+            return false;
           }
         }
-        return filteredArray;
-      }
-      return values;
-    });
+        return true;
+      })
+    );
+  }
+
+  data(textFilter = {}, dateFilter = {created: {startDate: '', endDate: ''}, modified: {startDate: '', endDate: ''}}) {
+    return this.records;
   }
 
   save(dataSet) {
@@ -71,5 +63,4 @@ export class RecordsService {
       }
     }
   }
-
 }

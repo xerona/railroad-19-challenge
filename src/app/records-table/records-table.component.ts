@@ -12,7 +12,7 @@ import { RecordsService } from '../shared/records.service';
 })
 export class RecordsTableComponent implements OnInit {
 
-  records$: Observable<{}[]>;
+  records$;
 
   alerts:Array<Object> = [];
 
@@ -22,28 +22,28 @@ export class RecordsTableComponent implements OnInit {
   constructor(private recordsService: RecordsService) { }
 
   ngOnInit() {
-    this.fetchRecords();
+    this.records$ = this.recordsService.data();
+    this.filterRecords();
   }
 
   showAlert(alertData) {
     this.alerts = [];
     this.alerts.push(alertData);
-    this.fetchRecords();
+    this.filterRecords();
   }
 
   filterList(textFilter) {
     this.textFilter = Object.assign({}, this.textFilter, textFilter);
-    this.fetchRecords();
+    this.filterRecords();
   }
 
   filterListByDate(dateFilter) {
     this.dateFilter = Object.assign({}, this.dateFilter, dateFilter);
-    this.fetchRecords();
+    this.filterRecords();
   }
 
-  fetchRecords() {
-    // I suspect I'm doing this wrongly. New data should be pushed.
-    this.records$ = this.recordsService.data(this.textFilter, this.dateFilter);
+  filterRecords() {
+    this.recordsService.filterRecords(this.textFilter, this.dateFilter);
   }
 
   ludicrousMode() {
