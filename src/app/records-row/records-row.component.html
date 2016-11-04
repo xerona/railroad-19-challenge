@@ -1,4 +1,6 @@
-<form>
+<form
+  #formRef="ngForm"
+>
   <div class="col-sm-1 table-data">{{record.title}}</div>
   <div class="col-sm-1 table-data">{{record.division}}</div>
   <div *ngIf="edit" class="col-sm-2">
@@ -11,14 +13,16 @@
     >
   </div>
   <div *ngIf="!edit" class="col-sm-2 table-data">{{record.projectOwner}}</div>
-  <div *ngIf="edit" class="col-sm-2">
+  <div *ngIf="edit" [ngClass]="{'col-sm-2': true, 'has-error': recordBudgetRef.invalid}">
     <input
       class="form-control text-center"
       name="recordBudget"
       #recordBudgetRef="ngModel"
       [(ngModel)]="record.budget"
       placeholder="Budget"
+      pattern="^[0-9]+(\.[0-9]{1,2})?$"
     >
+    <label class="control-label" *ngIf="recordBudgetRef.invalid">Incorrect format. Please enter currency using numbers.</label>
   </div>
   <div *ngIf="!edit" class="col-sm-2 table-data">{{record.budget | currency: 'USD': true}}</div>
   <div *ngIf="edit" class="col-sm-2">
@@ -37,7 +41,7 @@
     class="col-sm-2 text-right"
     *ngIf="edit"
   >
-    <button class="btn btn-primary" (click)="saveChanges()">Save</button>
+    <button class="btn btn-primary" (click)="saveChanges()" [disabled]="formRef.invalid">Save</button>
     <button class="btn btn-link" (click)="cancelEdit()">Cancel</button>
   </div>
   <div

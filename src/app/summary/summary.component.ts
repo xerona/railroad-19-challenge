@@ -34,8 +34,8 @@ export class SummaryComponent implements OnInit {
       data[record.status]['divisions'][record.division]['budget'] = data[record.status]['divisions'][record.division]['budget'] || 0;
       data[record.status]['divisions'][record.division]['total'] = data[record.status]['divisions'][record.division]['total'] || 0;
 
-      data[record.status]['budget'] += record.budget;
-      data[record.status]['divisions'][record.division]['budget'] += record.budget;
+      data[record.status]['budget'] += +record.budget;
+      data[record.status]['divisions'][record.division]['budget'] += +record.budget;
 
       data[record.status]['total'] += 1;
       data[record.status]['divisions'][record.division]['total'] += 1;
