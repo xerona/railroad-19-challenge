@@ -6,12 +6,32 @@
     >
       <div class="panel panel-primary">
         <div class="panel-heading">
-          {{status.budget |  currency: 'USD': true}} - {{status.total}} {{status.name | capitalize}} projects
+          <h5>{{status.name | capitalize}}</h5>
         </div>
         <div class="panel-body">
-          <p *ngFor="let division of status.divisions">
-            {{division.budget |  currency: 'USD': true}} - {{division.total}} {{division.name | capitalize}} projects
-          </p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Division</th>
+                <th class="text-center">Number of projects</th>
+                <th class="text-right">Budget</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let division of status.divisions">
+                <td>{{division.name | capitalize}}</td>
+                <td class="text-center">{{division.total}}</td>
+                <td class="text-right">{{division.budget |  currency: 'USD': true}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th class="text-center">{{status.total}}</th>
+                <th class="text-right">{{status.budget |  currency: 'USD': true}}</th>
+              </tr>
+            </tfoot>
+          </table>
         </div>
       </div>
     </div>
